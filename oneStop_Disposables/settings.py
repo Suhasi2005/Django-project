@@ -44,12 +44,17 @@ INSTALLED_APPS = [
     'app',
     'account',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
 REST_FRAMEWORK = {
+    # SessionAuthentication serves the browser-based React web frontend
+    # (cookie + CSRF); TokenAuthentication serves the React Native app,
+    # which has no cookie jar and authenticates with a bearer token instead.
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
